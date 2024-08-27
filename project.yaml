@@ -1,0 +1,17 @@
+services:
+  dhcpd:
+    image: networkboot/dhcpd:1.3.0
+    network_mode: host
+    volumes:
+    - $PROJECT_PATH/dhcpd:/data
+  netbootxyz:
+    image: netbootxyz/netbootxyz:0.7.3-nbxyz1
+    container_name: netbootxyz
+    ports:
+    - 3000:3000
+    - 69:69/udp
+    - 80:80
+    restart: unless-stopped
+    volumes:
+    - $PROJECT_PATH/config:/config # optional
+    - $PROJECT_PATH/assets:/assets # optional
